@@ -12,15 +12,15 @@ if(isset($_POST['submit'])) {
 
   if ($conn->query($sql))
   {
-  echo "New data inserted successfully!!!";
+    header ("Location:home.php");
   }else{
    echo "Something went wrong";
   }
 }
 
 $fetchsql ="SELECT * FROM student";
-$resul=$conn->query($fetchsql);
-$data =$resul->fetch_all(MYSQLI_ASSOC);
+$result=$conn->query($fetchsql);
+$data =$result->fetch_all(MYSQLI_ASSOC);
 echo "<pre>";
 print_r($data);
 echo "</pre>";
@@ -93,17 +93,18 @@ echo "</pre>";
       <tbody>
 
         <?php
+        $i=1;
         foreach($data as $value){ ?>
             <tr>
-             <th scope="row">1</th>
+             <th scope="row"><?php echo $i++; ?></th>
               <td><?php echo $value['name'];  ?></td>
               <td><?php echo $value['email'];  ?></td>
               <td><?php echo $value['adress']; ?></td>
               <td><?php echo $value['phone'];  ?></td>
               <td><?php echo $value['image']; ?></td>
               <td>
-                <button class="btn btn-primary btn-sm">Edit</button>
-                <button class="btn btn-primary btn-sm">Delete</button>
+                <a href ="std_edit.php?id=<?php echo $value['id']; ?>"  class="btn btn-primary btn-sm">Edit</button>
+                <a href ="std_delete.php?id=<?php echo $value['id']; ?>" class="btn btn-danger btn-sm">Delete</button>
                 </td>
             </tr>
         <?php }
