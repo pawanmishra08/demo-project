@@ -38,7 +38,7 @@ echo "</pre>";
     <!-- As a link -->
     <nav class="navbar bg-body-tertiary" style ="background-color: orange !important;">
       <div class="container-fluid">
-       <a class="navbar-brand" href="#">student Record</a>
+       <a class="navbar-brand mx-auto" href="#">student Record</a>
       </div>
     </nav>
 
