@@ -98,13 +98,13 @@ echo "</pre>";
             <tr>
              <th scope="row"><?php echo $i++; ?></th>
               <td><?php echo $value['name'];  ?></td>
-              <td><?php echo $value['email'];  ?></td>
-              <td><?php echo $value['adress']; ?></td>
-              <td><?php echo $value['phone'];  ?></td>
-              <td><?php echo $value['image']; ?></td>
+              <td><?php echo  $value['email'];  ?></td>
+              <td><?php echo  $value['adress']; ?></td>
+              <td><?php echo  $value['phone'];  ?></td>
+              <td><?php echo  $value['image']; ?></td>
               <td>
-                <a href ="std_edit.php?id=<?php echo $value['id']; ?>"  class="btn btn-primary btn-sm">Edit</button>
-                <a href ="std_delete.php?id=<?php echo $value['id']; ?>" class="btn btn-danger btn-sm">Delete</button>
+                <a href ="std_edit.php?id=<?php echo ['id']; ?>"  class="btn btn-primary btn-sm">Edit</button>
+                <a href ="std_delete.php?id=<?php echo ['id']; ?>" class="btn btn-danger btn-sm">Delete</button>
                 </td>
             </tr>
         <?php }
