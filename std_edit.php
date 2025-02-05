@@ -8,7 +8,24 @@ if(!empty($_GET['id'])){
     $result = $conn->query($edit_sql);
     $data = $result->fetch_assoc();
     print_r($data);
-}
+  }
+
+    // print_r($_POST);  to see the error!
+    // die();
+  if (isset($_POST['submit'])){
+    print_r($_POST);
+    $id = $_POST['id'];
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $adress = $_POST['adress'];
+    $image = $_POST['image'];
+    $updatesql = "UPDATE `student` SET `name`='$name',`email`= '$email',`adress`='$adress',`phone`='$phone',`image`='$image' WHERE id = $id";
+    if($conn-> query($updatesql)){
+      header("Location: home.php");
+    }
+  }
+
 ?>
 
 <!doctype html>
@@ -33,6 +50,7 @@ if(!empty($_GET['id'])){
           <div class = "card p-3">
 
             <form action ="" method ="POST">
+              <input type = "hidden" value = "<?php echo $data['id']; ?>" name= "id">
 
               <div>
                <label for= "name">Name:</label>
@@ -45,15 +63,15 @@ if(!empty($_GET['id'])){
               </div>
               <div class="mb-3">
                <label for="phone" class="phone">phone</label>
-               <input type="number" name="phone" class="form-control" id="phone" placeholder ="Enter your contact number">
+               <input type="number" value="<?php echo $data['phone']; ?>"name="phone" class="form-control" id="phone" placeholder ="Enter your contact number">
               </div>
               <div class="mb-3">
                <label class="adress" for="adress">Address</label>
-               <input type="adress" name="adress" class="form-control" id="adress" placeholder ="Enter your adress">
+               <input type="adress" value="<?php echo $data['adress']; ?>"name="adress" class="form-control" id="adress" placeholder ="Enter your adress">
               </div>
               <div class="mb-3">
                <label class="file" for="file">File</label>
-               <input type="file"  name =" file" class="form-control" id="file" placeholder ="Attch with your file">
+               <input type="file"  name =" file" class="form-control" id="file" placeholder ="Attach with your file">
               </div>
 
              <button type="submit"  name ="submit" class="btn btn-primary">Submit</button>
