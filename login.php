@@ -1,3 +1,36 @@
+<?php
+session_start();
+if(!empty($_SESSION['email'])){
+  header("location:dashboard/index.php");
+}
+include "connection.php";
+  if(isset($_POST['login'])) {
+  //print_r($_POST);
+  $email = $_POST['email'];
+  $pass = $_POST['password'];
+  $sql = "SELECT * FROM `admin` WHERE `email`= '$email'";
+
+  $result = $conn->query($sql);
+  if(mysqli_num_rows($result)>0){
+  $data = $result->fetch_assoc();
+
+    if(!empty($data['email']))
+    {
+       if($pass==$data['password'])
+       {
+        $_SESSION ['email'] = $email;
+        $_SESSION['name'] = $data['name'];
+        header("location: dashboard/index.php");
+       } else {
+        echo "Password dooes not match!!!";
+       }
+    }
+  }else{
+    echo "email does not match";
+  }
+}
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,7 +45,8 @@
      <div class ="col-3 mx-auto">
         <img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2B9LswCEh3jElEIiDsU4C60RTU3Chlv-h2A&s" class="mx-auto d-block">
         <div class = "card mt-5 p-2">
-            <form>
+
+            <form action= "" method = "POST">
                 <div>
                     <label for= "email">Email</label>
                     <input type="email" class ="form-control" name ="email">
@@ -22,7 +56,7 @@
                     <input type="password" class ="form-control" name ="password">
                 </div>
                     <div class="d-grid gap-2 mt-2">
-                      <button class="btn btn-primary" type="button">Login</button>
+                      <button class="btn btn-primary" name="login" type="submit">Login</button>
                     </div>
             </form>
         </div>
